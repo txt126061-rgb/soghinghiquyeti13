@@ -994,7 +994,7 @@
             let participantsHTML = '';
             if (participants.length > 0) {
                 participantsHTML = `
-                    <p><strong>Thành phần tham dự:</strong></p>
+                    <p><strong>II. THÀNH PHẦN THAM DỰ:</strong></p>
                     <div style="white-space: pre-line">${participants.join('\n')}</div>
                 `;
             }
@@ -1007,7 +1007,7 @@
                 </div>
         
                 <div class="content-section">
-                    <p><strong>Căn cứ:</strong></p>
+                    <p><strong>I. CĂN CỨ:</strong></p>
                     <div style="white-space: pre-line">${canCu || 'Căn cứ Điều lệ Đoàn TNCS Hồ Chí Minh'}</div>
                     
                     ${participantsHTML}
@@ -1015,11 +1015,11 @@
                     <p><strong>Sau khi thảo luận và biểu quyết tại ${hoiNghi}</strong><br>
                     tổ chức vào hồi ${thoiGianDiaDiem}</p>
         
-                    <p><strong>NGHỊ QUYẾT:</strong></p>
+                    <p><strong>III. NGHỊ QUYẾT:</strong></p>
                     ${formatContent(noiDung)}
         
                     ${toChucThucHien ? `
-                    <p><strong>Tổ chức thực hiện:</strong></p>
+                    <p><strong>IV. TỔ CHỨC THỰC HIỆN</strong></p>
                     ${formatContent(toChucThucHien)}
                     ` : ''}
         
