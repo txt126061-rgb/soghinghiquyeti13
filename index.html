@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghi Sổ Nghị Quyết - Chi Đoàn</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        :root {
+            --primary-color: #d32f2f;
+            --primary-dark: #b71c1c;
+            --primary-light: #ff6659;
+            --secondary-color: #1976d2;
+            --secondary-dark: #1565c0;
+            --accent-color: #ffd54f;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.15);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        /* Header Styles */
+        .site-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        /* Logo styles */
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid var(--primary-color);
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .header-logo .logo {
+            width: 60px;
+            height: 60px;
+            border: 2px solid white;
+        }
+        
+        .header-title h1 {
+            font-size: 22px;
+            margin: 0;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .header-title p {
+            margin: 5px 0 0 0;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .header-contact p {
+            margin: 2px 0;
+            font-size: 12px;
+            text-align: right;
+        }
+        
+        .main-nav {
+            background: rgba(0,0,0,0.1);
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+        
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .main-nav a:hover {
+            color: var(--accent-color);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Footer Styles */
+        .site-footer {
+            background: #333;
+            color: white;
+            padding: 30px 0 0 0;
+            margin-top: 30px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary-light);
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .footer-section p, .footer-section a {
+            margin: 5px 0;
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            background: #222;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+        }
+        
+        .footer-bottom p {
+            margin: 0;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Form Section */
+        .form-section {
+            padding: 30px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .pdf-section {
+            padding: 30px;
+            background: var(--bg-light);
+            display: none;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 26px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 15px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+        }
+
+        label i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 15px;
+            transition: var(--transition);
+            background: var(--bg-white);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .btn-generate {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-generate:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-download {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* PDF Styles */
+        .pdf-template {
+            background: white;
+            padding: 40px;
+            min-height: 297mm;
+            position: relative;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .logo-top {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            width: 60%;
+        }
+        
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 40%;
+            text-align: right;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 3px;
+            margin-top: 5px;
+        }
+
+        .doan-truong {
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .chi-doan {
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .so-nghi-quyet {
+            font-style: italic;
+            font-size: 15px;
+            text-align: center;
+            width: 100%;
+            margin-top: 3px;
+        }
+
+        .separator {
+            text-align: center;
+            font-size: 15px;
+            margin: 3px 0;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 40%;
+            text-align: right;
+        }
+
+        .doan-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 7px;
+            margin-bottom: 3px;
+        }
+
+        .ngay-thang {
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        .nghi-quyet-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 30px 0;
+            color: var(--primary-color);
+        }
+
+        .content-section {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .signature-section {
+            margin-top: 50px;
+            text-align: right;
+        }
+
+        .date-place {
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .signature-line {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .signature-name {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 80px);
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Tabs for form sections */
+        .form-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-contact {
+                text-align: center;
+                margin-top: 10px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .main-nav {
+                text-align: center;
+            }
+            
+            .main-nav a {
+                display: inline-block;
+                margin: 5px 10px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .site-header, .site-footer, .button-group {
+                display: none !important;
+            }
+            
+            .pdf-section {
+                display: block !important;
+                padding: 0;
+            }
+            
+            .pdf-template {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .logo-image {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* Additional styling for new elements */
+        .participants-container {
+            margin-top: 10px;
+        }
+
+        .participant-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .participant-item input {
+            flex: 1;
+        }
+
+        .btn-add-participant {
+            background: #28a745;
+            color: white;
+            padding: 8px 15px;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .btn-add-participant:hover {
+            background: #218838;
+        }
+
+        .btn-remove-participant {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-remove-participant:hover {
+            background: #c82333;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            font-size: 20px;
+        }
+
+        /* Giữ nguyên định dạng xuống dòng */
+        #pdfBody p {
+            margin-bottom: 8px;
+            text-align: justify;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="header-logo">
+                <div class="logo">
+                    <img src="https://i.postimg.cc/m26zY6xb/logo-10I.jpg" alt="Logo Chi đoàn" class="logo-image">
+                </div>
+            </div>
+            <div class="header-title">
+                <h1>ĐOÀN TNCS HỒ CHÍ MINH</h1>
+                <p>Trường THPT Chuyên Bình Long</p>
+            </div>
+            <div class="header-contact">
+                <p><i class="fas fa-phone"></i> Điện thoại: 0123.456.789</p>
+                <p><i class="fas fa-envelope"></i> Email: doantruong@thptchuyenbinhlong.edu.vn</p>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <a href="#"><i class="fas fa-home"></i> Trang chủ</a>
+            <a href="#"><i class="fas fa-info-circle"></i> Giới thiệu</a>
+            <a href="#"><i class="fas fa-question-circle"></i> Hướng dẫn</a>
+            <a href="#"><i class="fas fa-address-book"></i> Liên hệ</a>
+        </nav>
+    </header>
+    <div class="container">
+        <!-- Form Section -->
+        <div class="form-section" id="formSection">
+            <h1><i class="fas fa-file-contract"></i> BIÊN BẢN GHI SỔ NGHỊ QUYẾT CHI ĐOÀN</h1>
+            
+            <div class="form-tabs">
+                <div class="tab active" data-tab="basic-info">Thông tin cơ bản</div>
+                <div class="tab" data-tab="content">Nội dung nghị quyết</div>
+                <div class="tab" data-tab="participants">Thành phần tham dự</div>
+            </div>
+            
+            <form id="nghiQuyetForm">
+                <div class="tab-content active" id="basic-info">
+                    <div class="card">
+                        <div class="card-title"><i class="fas fa-info-circle"></i> Thông tin chung</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ngayThang"><i class="fas fa-calendar-alt"></i> Ngày, tháng, năm:</label>
+                                <input type="date" id="ngayThang" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="soNghiQuyet"><i class="fas fa-hashtag"></i> Số Nghị quyết:</label>
+                                <input type="text" id="soNghiQuyet" placeholder="VD: 01/NQ-CĐ" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tenChiDoan"><i class="fas fa-users"></i> Tên Chi đoàn:</label>
+                            <input type="text" id="tenChiDoan" placeholder="VD: Chi đoàn 10I" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tenNghiQuyet"><i class="fas fa-file-signature"></i> Tên Nghị quyết:</label>
+                            <input type="text" id="tenNghiQuyet" placeholder="VD: Về việc phân công nhiệm vụ Ban Chấp hành chi đoàn" required>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title"><i class="fas fa-clipboard-list"></i> Thông tin hội nghị</div>
+                        <div class="form-group">
+                            <label for="hoiNghi"><i class="fas fa-users"></i> Tại Hội nghị:</label>
+                            <input type="text" id="hoiNghi" placeholder="VD: Hội nghị Ban Chấp hành chi đoàn mở rộng" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="thoiGianDiaDiem"><i class="fas fa-map-marker-alt"></i> Thời gian và địa điểm:</label>
+                            <input type="text" id="thoiGianDiaDiem" placeholder="VD: 14h00 ngày 10/10/2024, tại Phòng học A1" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="content">
+                    <div class="card">
+                        <div class="card-title"><i class="fas fa-file-alt"></i> Nội dung nghị quyết</div>
+                        <div class="form-group">
+                            <label for="canCu"><i class="fas fa-gavel"></i> Căn cứ:</label>
+                            <textarea id="canCu" placeholder="VD: Căn cứ Điều lệ Đoàn TNCS Hồ Chí Minh; Căn cứ Chương trình công tác Đoàn năm học..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="noiDung"><i class="fas fa-align-left"></i> Nội dung Nghị quyết:</label>
+                            <textarea id="noiDung" placeholder="Ghi rõ nội dung các điều, khoản của Nghị quyết..." required></textarea>
+                            <small style="color: #666; font-style: italic;">Nhập nội dung nguyên văn, giữ nguyên dấu gạch đầu dòng nếu có</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="toChucThucHien"><i class="fas fa-tasks"></i> Tổ chức thực hiện:</label>
+                            <textarea id="toChucThucHien" placeholder="Phân công nhiệm vụ cụ thể cho các thành viên..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="participants">
+                    <div class="card">
+                        <div class="card-title"><i class="fas fa-user-friends"></i> Thành phần tham dự</div>
+                        <div class="form-group">
+                            <label for="biThu"><i class="fas fa-user-tie"></i> Bí thư Chi đoàn:</label>
+                            <input type="text" id="biThu" placeholder="Họ tên Bí thư" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-users"></i> Thành viên tham dự:</label>
+                            <div class="participants-container" id="participantsContainer">
+                                <!-- Participants will be added here -->
+                            </div>
+                            <button type="button" class="btn-add-participant" id="addParticipant">
+                                <i class="fas fa-plus"></i> Thêm thành viên
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="noiNhan"><i class="fas fa-share-square"></i> Nơi nhận:</label>
+                            <input type="text" id="noiNhan" placeholder="VD: - Như trên; - Lưu VT;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-secondary" id="prevTab" style="display: none;">
+                        <i class="fas fa-arrow-left"></i> Quay lại
+                    </button>
+                    <button type="button" class="btn-secondary" id="nextTab">
+                        Tiếp theo <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button type="button" class="btn-generate" id="generateBtn" style="display: none;">
+                        <i class="fas fa-file-pdf"></i> Tạo Nghị quyết
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- PDF Preview Section -->
+        <div class="pdf-section" id="pdfSection">
+            <div class="button-group">
+                <button type="button" class="btn-download" onclick="downloadPDF()">
+                    <i class="fas fa-download"></i> Tải về PDF
+                </button>
+                <button type="button" class="btn-secondary" onclick="backToForm()">
+                    <i class="fas fa-arrow-left"></i> Quay lại Form
+                </button>
+            </div>
+            
+            <div class="pdf-template" id="pdfContent">
+                <!-- Header với 2 logo sát nhau -->
+                <div class="header">
+                    <div class="logo-top">
+                        <div class="logo-container">
+                            <div class="logo">
+                                <img src="https://i.postimg.cc/m26zY6xb/logo-10I.jpg" alt="Logo Đoàn trường" class="logo-image">
+                            </div>
+                        </div>
+                        <div class="logo-container">
+                            <div class="logo">
+                                <img src="https://i.postimg.cc/m26zY6xb/logo-10I.jpg" alt="Logo Chi đoàn" class="logo-image">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phần thông tin dưới logo -->
+                    <div class="header-info">
+                        <div class="logo-section">
+                            <div class="info-section">
+                                <div class="doan-truong">ĐOÀN TRƯỜNG THPT CHUYÊN </br> BÌNH LONG</div>
+                                <div class="chi-doan" id="pdfChiDoan">CHI ĐOÀN - LỚP 11L</div>
+                                <div class="so-nghi-quyet" id="pdfSoNghiQuyet">Số: 02/NQ-ĐCĐ11L</div>
+                            </div>
+                        </div>
+                        <div class="right-section">
+                            <div class="doan-title">ĐOÀN TNCS HỒ CHÍ MINH</div>
+                            <div class="ngay-thang" id="pdfNgayThang"></br>Bình Long, ngày 22 tháng 09 năm 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content will be populated by JavaScript -->
+                <div id="pdfBody">
+                    <!-- Dynamic content goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ĐOÀN TRƯỜNG THPT CHUYÊN BÌNH LONG</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: Phường Bình Long, Thị xã Bình Long, Tỉnh Bình Phước</p>
+                <p><i class="fas fa-phone"></i> Điện thoại: 0123.456.789</p>
+                <p><i class="fas fa-envelope"></i> Email: doantruong@thptchuyenbinhlong.edu.vn</p>
+            </div>
+            <div class="footer-section">
+                <h3>LIÊN KẾT NHANH</h3>
+                <a href="#"><i class="fas fa-home"></i> Trang chủ</a>
+                <a href="#"><i class="fas fa-question-circle"></i> Hướng dẫn sử dụng</a>
+                <a href="#"><i class="fas fa-file-alt"></i> Mẫu nghị quyết</a>
+                <a href="#"><i class="fas fa-address-book"></i> Liên hệ</a>
+            </div>
+            <div class="footer-section">
+                <h3>HỖ TRỢ</h3>
+                <p><i class="fas fa-phone-volume"></i> Hotline: 0123.456.789</p>
+                <p><i class="fas fa-clock"></i> Thời gian: 7h00 - 17h00</p>
+                <p><i class="fas fa-calendar-week"></i> Từ Thứ 2 đến Thứ 6</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Đoàn trường THPT Chuyên Bình Long. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab navigation
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const prevBtn = document.getElementById('prevTab');
+        const nextBtn = document.getElementById('nextTab');
+        const generateBtn = document.getElementById('generateBtn');
+        
+        let currentTab = 0;
+        
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                switchTab(index);
+            });
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentTab < tabs.length - 1) {
+                switchTab(currentTab + 1);
+            }
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentTab > 0) {
+                switchTab(currentTab - 1);
+            }
+        });
+        
+        function switchTab(index) {
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            tabs[index].classList.add('active');
+            tabContents[index].classList.add('active');
+            
+            currentTab = index;
+            
+            // Update button visibility
+            prevBtn.style.display = currentTab === 0 ? 'none' : 'flex';
+            nextBtn.style.display = currentTab === tabs.length - 1 ? 'none' : 'flex';
+            generateBtn.style.display = currentTab === tabs.length - 1 ? 'flex' : 'none';
+        }
+        
+        // Participants management
+        const participantsContainer = document.getElementById('participantsContainer');
+        const addParticipantBtn = document.getElementById('addParticipant');
+        
+        addParticipantBtn.addEventListener('click', () => {
+            addParticipantField();
+        });
+        
+        function addParticipantField(value = '') {
+            const participantDiv = document.createElement('div');
+            participantDiv.className = 'participant-item';
+            participantDiv.innerHTML = `
+                <input type="text" class="participant-name" placeholder="Họ tên thành viên" value="${value}">
+                <button type="button" class="btn-remove-participant">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            participantsContainer.appendChild(participantDiv);
+            
+            // Add event listener to remove button
+            const removeBtn = participantDiv.querySelector('.btn-remove-participant');
+            removeBtn.addEventListener('click', () => {
+                participantDiv.remove();
+            });
+        }
+        
+        function formatDate(inputDate) {
+            const date = new Date(inputDate);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            return `Bình Long, ngày ${day} tháng ${month} năm ${year}`;
+        }
+        
+        // Function to format content - hiển thị nguyên văn
+        function formatContent(content) {
+            return `<div style="white-space: pre-line">${content}</div>`;
+        }
+        
+        function generatePDF() {
+            // Get form values
+            const soNghiQuyet = document.getElementById('soNghiQuyet').value;
+            const tenChiDoan = document.getElementById('tenChiDoan').value;
+            const tenNghiQuyet = document.getElementById('tenNghiQuyet').value;
+            const canCu = document.getElementById('canCu').value;
+            const hoiNghi = document.getElementById('hoiNghi').value;
+            const thoiGianDiaDiem = document.getElementById('thoiGianDiaDiem').value;
+            const noiDung = document.getElementById('noiDung').value;
+            const toChucThucHien = document.getElementById('toChucThucHien').value;
+            const noiNhan = document.getElementById('noiNhan').value;
+            const biThu = document.getElementById('biThu').value;
+            const ngayThang = document.getElementById('ngayThang').value;
+            
+            // Get participants
+            const participantInputs = document.querySelectorAll('.participant-name');
+            const participants = Array.from(participantInputs)
+                .map(input => input.value.trim())
+                .filter(name => name !== '');
+        
+            // Validate required fields
+            if (!soNghiQuyet || !tenChiDoan || !tenNghiQuyet || !hoiNghi || !thoiGianDiaDiem || !noiDung || !biThu || !ngayThang) {
+                alert('Vui lòng điền đầy đủ các trường bắt buộc!');
+                return;
+            }
+        
+            // Format ngày tháng
+            const formattedDate = formatDate(ngayThang);
+        
+            // Build PDF content
+            const pdfBody = document.getElementById('pdfBody');
+            
+            // Update header information
+            document.getElementById('pdfChiDoan').textContent = tenChiDoan;
+            document.getElementById('pdfSoNghiQuyet').textContent = `Số: ${soNghiQuyet}`;
+            document.getElementById('pdfNgayThang').textContent = formattedDate;
+            
+            // Build participants list
+            let participantsHTML = '';
+            if (participants.length > 0) {
+                participantsHTML = `
+                    <p><strong>Thành phần tham dự:</strong></p>
+                    <div style="white-space: pre-line">${participants.join('\n')}</div>
+                `;
+            }
+            
+            // Build the PDF content
+            pdfBody.innerHTML = `
+                <div class="nghi-quyet-title">
+                    NGHỊ QUYẾT<br>
+                    ${tenNghiQuyet}
+                </div>
+        
+                <div class="content-section">
+                    <p><strong>Căn cứ:</strong></p>
+                    <div style="white-space: pre-line">${canCu || 'Căn cứ Điều lệ Đoàn TNCS Hồ Chí Minh'}</div>
+                    
+                    ${participantsHTML}
+                    
+                    <p><strong>Sau khi thảo luận và biểu quyết tại ${hoiNghi}</strong><br>
+                    tổ chức vào hồi ${thoiGianDiaDiem}</p>
+        
+                    <p><strong>NGHỊ QUYẾT:</strong></p>
+                    ${formatContent(noiDung)}
+        
+                    ${toChucThucHien ? `
+                    <p><strong>Tổ chức thực hiện:</strong></p>
+                    ${formatContent(toChucThucHien)}
+                    ` : ''}
+        
+                    <div class="date-place">
+                        <p>Nghị quyết có hiệu lực kể từ ngày thông qua.</p>
+                    </div>
+        
+                    <div class="signature-section">
+                        <div class="signature-line">
+                            <div>TM. BAN CHẤP HÀNH CHI ĐOÀN</div>
+                            <div class="signature-name">BÍ THƯ</div>
+                            <div style="margin-top: 50px;"><strong>${biThu}</strong></div>
+                        </div>
+                    </div>
+        
+                    ${noiNhan ? `
+                    <div class="footer">
+                        <div><strong>Nơi nhận:</strong><br>${noiNhan}</div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        
+            // Show PDF section and hide form section
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('pdfSection').style.display = 'block';
+        }
+        
+        function downloadPDF() {
+            const element = document.getElementById('pdfContent');
+            
+            const options = {
+                margin: [10, 10, 10, 10],
+                filename: 'nghi_quyet_chi_doan.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+        
+            html2pdf().set(options).from(element).save();
+        }
+        
+        function backToForm() {
+            document.getElementById('pdfSection').style.display = 'none';
+            document.getElementById('formSection').style.display = 'block';
+        }
+        
+        // Set default values for demonstration
+        window.onload = function() {
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0]; // Định dạng YYYY-MM-DD cho input date
+            
+            document.getElementById('soNghiQuyet').value = '01/NQ-CĐ';
+            document.getElementById('tenChiDoan').value = 'Chi đoàn 10I';
+            document.getElementById('tenNghiQuyet').value = 'Về việc phân công nhiệm vụ Ban Chấp hành chi đoàn nhiệm kỳ 2024-2025';
+            document.getElementById('canCu').value = 'Căn cứ Điều lệ Đoàn TNCS Hồ Chí Minh;\nCăn cứ Chương trình công tác Đoàn và phong trào thanh niên năm học 2024-2025;';
+            document.getElementById('hoiNghi').value = 'Hội nghị Ban Chấp hành chi đoàn mở rộng';
+            document.getElementById('thoiGianDiaDiem').value = `14h00 ngày ${today.toLocaleDateString('vi-VN')}, tại Phòng học 10I`;
+            
+            // Set default content
+            document.getElementById('noiDung').value = `Điều 1: Phân công nhiệm vụ cụ thể cho các thành viên Ban Chấp hành chi đoàn
+- Bí thư: Nguyễn Văn A - Phụ trách chung
+- Phó Bí thư: Trần Thị B - Phụ trách học tập
+- Ủy viên: Lê Văn C - Phụ trách văn thể mỹ
+- Ủy viên: Phạm Thị D - Phụ trách tài chính
+
+Điều 2: Thông qua kế hoạch hoạt động tháng 10/2024
+- Tổ chức Hội thi "Chúng em kể chuyện Bác Hồ"
+- Tham gia Chiến dịch "Ngày thứ Bảy tình nguyện"
+- Tổ chức sinh hoạt chuyên đề "Tuổi trẻ với biển đảo quê hương"`;
+            
+            document.getElementById('toChucThucHien').value = `- Các đồng chí trong Ban Chấp hành chi đoàn có trách nhiệm thực hiện nghiêm túc nhiệm vụ được phân công.
+- Định kỳ báo cáo kết quả thực hiện tại các cuộc họp Ban Chấp hành.
+- Phân công cụ thể:
+  + Đồng chí Nguyễn Văn A: Chỉ đạo chung, theo dõi tiến độ
+  + Đồng chí Trần Thị B: Tổ chức các hoạt động học tập
+  + Đồng chí Lê Văn C: Phụ trách công tác văn nghệ, thể thao`;
+            
+            document.getElementById('noiNhan').value = '- Như trên;\n- Lưu VT.';
+            document.getElementById('biThu').value = 'Nguyễn Văn A';
+            document.getElementById('ngayThang').value = formattedDate; // Set default date
+            
+            // Add some default participants
+            addParticipantField('Trần Thị B - Phó Bí thư');
+            addParticipantField('Lê Văn C - Ủy viên');
+            addParticipantField('Phạm Thị D - Ủy viên');
+            
+            // Set up generate button
+            generateBtn.addEventListener('click', generatePDF);
+        };
+    </script>
+</body>
+</html>
